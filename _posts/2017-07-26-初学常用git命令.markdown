@@ -1,0 +1,237 @@
+---
+layout:     post
+title:      "初学Git命令笔记"
+subtitle:   "不适合人类阅读，非常水的自我笔记"
+date:       2017-07-26 09:32:15
+author:     "AXiang"
+header-img: "img/post-bg-git.jpg"
+catalog:  true
+tags:
+    - Git
+    - 笔记
+---
+> “更新到地老天荒 ----17.08.04”
+
+## 前言
+
+大三接触到Git和svn，是仰望和膜拜。可惜毕业后才开始慢慢学习去使用(估计山口山玩多了)。
+
+---
+
+## 正文
+
+大四实习了半年，学到的东西挺多，可惜忘得也不少。在毕业后就职前，正想着要找个能沉淀知识的方法，手写笔记是不可能适合我这种手癌懒猿的。于是乎便从网上照猫画虎的搞起了自己的github blog，写些自己的知识心得总结以及一些分享。
+
+第一篇正式的博文就写自己在搭建github blog时使用git牵涉到的一些常用命令，还有就是日后学习到新的git命令的分享与理解。
+
+#### 参考资料
+
+- [Git官方网站](https://git-scm.com/)(国内访问和下载会比较慢，可以百度移步[git国内镜像](https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&srcqid=1179652933219750673&tn=12092018_17_hao_pg&wd=git%20%E9%95%9C%E5%83%8F&oq=git%2520%25E9%2595%259C%25E5%2583%258F&rsv_pq=fb5339a60000cf1e&rsv_t=2450cyhfIWeQRlgpPVt19ZIpKCC9czsYpDRlsiUeEFD43PoUHRL4tH4FwcWYLW1CpE0FSe%2FFUBEq&rqlang=cn&rsv_enter=0&inputT=29537&sug=git%25E4%25B8%258B%25E8%25BD%25BD&rsv_sug3=163&rsv_sug1=88&rsv_sug7=100&rsv_sug2=0&rsv_sug4=35257&rsv_sug=1))
+- [Git官方中文手册](https://git-scm.com/book/zh/v2)
+- [Git客户端图文详解安装配置](http://www.ihref.com/read-16377.html)
+- [廖雪峰的Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- 待更新
+
+以上是我现阶段用到了的参考文献。
+
+#### 安装命令
+
+虽说Window是较烂的开发平台，无奈从小就上了微软的贼船，暂且先攻略Window环境下的Git使用。
+
+Window版的Git可以直接从上述[参考资料](https://git-scm.com/)里直接下载`.exe`，可以按默认选项安装即可，其他什么都不用（相对于Linux和Mac，微软就是傻瓜型安装）。
+
+安装后，桌面右键有Git GUI Here 或是 Git Bash Here的选项。成功后，可以设置一下自己的用户名和Email地址。
+
+
+```ruby    
+
+    # 设置所有仓库默认使用的用户名
+    $ git config --global user.name "Your Name"  
+
+    # 设置所有仓库默认使用的Email
+    $ git config --global user.email "email@example.com"
+
+    # 显示当前Git的配置 
+    $ git config --list
+
+```
+
+Git是分布式版本控制系统，所以每个人都应该有自己的标记，这个标记就是用户名和Email。  
+
+使用了`--global`这个参数后，表明这台机器所有的仓库都使用这个标记信息，之后也可以对取消或是对某个仓库指定不同的标记信息。
+
+#### 拥有一个仓库
+
+仓库相当于一个项目文件夹，官方译名：**repository**。Git可以管理这个仓库下的所有文件，任何一个文件被修改、删除，Git都能跟踪到，也可以还原到过去的某个时刻。
+
+
+```ruby
+
+    # 创建一个文件夹。也可以直接右键桌面新建文件夹，但是这种方式没有办法创建 . 开头的文件夹
+    $ mkdir 文件夹名
+
+    # 创建一个文件，直接右键新建的局限性同上，但是可以通过文件另存为将名字开头改成`.XXXX`
+    $ touch 文件名
+
+    # 新建一个文件并进入编辑状态（若文件已经存在则直接进入编辑状态）
+    $ vi 文件名
+    
+    # 显示当前目录
+    $ pwd    
+
+    # 显示当前目录所含文件，加上-ah参数表示连同隐藏文件一起显示
+    $ ls -ah
+
+    # 初始化仓库
+    $ git init
+
+    # 下载一个项目和它的整个代码历史
+    $ git clone 项目地址
+
+```   
+
+Windows系统自带的CMD是使用Windows自己的命令，而Git Bash则使用的是Linux下的命令。
+
+vi其实是Linux下的一个文本编辑器，所以`vi 文件名`后，其实是进入了vi程序。vi存在两种模式，编辑模式和命令模式，键盘输入字母`i`或`Insert`键进入编辑模式，按下`ESC`键，切换到命令模式。放弃所有文件修改：在命令模式下，键入 `:q!` 回车后放弃修改并退出vi。
+
+初始化仓库后，目录下多了一个隐藏状态的.git文件夹。这个目录是Git用来跟踪和管理仓库的，不需要我们改动。
+
+#### 增删改查
+
+![日常使用Git流程](/img/in-post/post-git/git-1708_1.png)
+
+日常使用Git只要记住上图6个命令，就可以了。但是熟练使用，恐怕要记住60～100个命令。
+
+下述是几个专有名词的译名：
+
+- Workspace：工作区
+- Index / Stage：暂存区
+- Repository：仓库区（或本地仓库）
+- Remote：远程仓库 
+
+##### 文件的操作
+
+当在本地撰写代码的时候，我们是处于工作区（Workspace）。使用`add`命令将文件提交到暂存区（Index/Stage），然后使用`commit`命令将处于暂存区所有的文件提交到本地仓库（Repository）。
+
+```ruby
+
+    # 添加指定文件到暂存区
+    $ git add 文件名 
+
+    # 添加当前目录的所有文件到暂存区
+    $ git add .
+
+    # 提交暂存区到仓库区
+    $ git commit -m 备注信息
+
+    # 删除工作区文件，并且将这次删除放入暂存区
+    $ git rm 文件名
+
+    # 改名文件（A改成B），并且将这个改名放入暂存区
+    $ git mv 文件名A 文件名B
+
+```
+
+##### 分支的操作
+
+所谓分支就是与主线的平行的世界，互不干扰。在小队项目里创建里一个属于自己的分支，别人看不到，还继续在原来的主线上正常工作，而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的主线上，这样，既安全，又不影响别人工作。
+
+```ruby
+
+    # 列出所有本地分支
+    $ git branch 
+
+    # 列出所有远程分支
+    $ git branch -r
+
+    # 新建一个分支，但依然停留在当前分支
+    $ git branch 分支名
+
+    # 新建一个分支，并切换到该分支
+    $ git checkout -b 分支名
+
+    # 切换到指定分支，并更新工作区
+    $ git checkout 分支名
+
+    # 删除本地分支，-D表示强制删除
+    $ git branch -d 分支名
+
+    # 删除远程分支
+    $ git push origin --delete 分支名
+    
+    # 推送一个空分支到远程分支，相当于删除远程分支
+    $ git push origin :分支名
+
+    # 合并指定分支到当前分支
+    $ git merge 分支名
+
+```
+
+##### 标签的操作    
+
+当提交`git commit -u "xxxxx"`时，编写的commit号往往不够生动形象，所以git引入了标签概念。发布一个版本时可以打上一个标签，将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。
+
+```ruby
+
+    # 列出所有本地标签
+    $ git tag 
+
+    # 查看tag信息
+    $ git show 标签名
+
+    # 删除本地tag，-D表示强制删除
+    $ git tag -d 标签名
+
+    # 删除远程标签
+    $ git push origin --delete tag 标签名
+
+```
+
+##### 查看信息
+
+```ruby
+
+    # 显示有变更的文件
+    $ git status
+
+    # 显示当前分支的版本历史
+    $ git log
+
+    # 显示暂存区和工作区的差异
+    $ git diff
+
+```
+
+##### 同步到远程仓库  
+
+在不同机器都可以从服务器里上克隆项目到机器下，也能推送到服务器上，推荐使用Github进行代码托管。
+
+```ruby
+
+    # 取回远程仓库的变化，并与本地分支合并
+    $ git pull [remote] [branch]
+
+    # 上传本地指定分支到远程仓库，加--force参数表示强制推送到远程仓库，即使有冲突
+    $ git push [remote] [branch]
+
+```
+
+##### 后悔操作
+
+```ruby
+
+    # 丢弃工作区的修改
+    $ git checkout -- 文件名
+
+    # 把暂存区的修改撤销掉，重新放回工作区
+    $ git reset HEAD 文件名
+
+    # 恢复到指定版本，暂存区编号通过git reflog命令查询
+    $ git reflog 
+    $ git reset --hard 暂存区编号
+
+```
+
+## 结尾
+
+日后慢慢学习，慢慢记录。

@@ -1,0 +1,92 @@
+# Site settings  
+title: 空的伸手摘星
+SEOTitle: 阿翔 | AXiang Blog
+header-img: img/home-bg.jpg
+email: hongjianpiaoxiang@163.com
+description: "关于一个菜鸡的个人博客"
+keyword: "王翔, 王翔的博客"
+url: "http://wangxiang.vip"              # host, for absolute URL
+baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
+
+
+
+# SNS settings 社交关联username
+RSS: true
+weibo_username:     空的伸手摘星
+zhihu_username:     lykqnbz
+github_username:    lykqnbz
+facebook_username:  王翔
+
+port: 5001 
+
+
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead. 
+# exclude:[  ]   -转换时排除某些文件、文件夹
+highlighter: rouge
+permalink: pretty
+paginate: 10               #一页显示多少篇文章
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true             # if you want to customize anchor. check out line:181 of `post.html` 自定义锚点修改_layouy/post.html 190行附近的anchorjs
+encoding:     "utf-8"
+
+
+# Gems  
+# from PR#40, to support local preview for Jekyll 3.0       jekyll3.0以上  使用必加参数
+
+#gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Disqus settings
+#disqus_username: _your_disqus_short_name_
+
+# Disqus settings（https://disqus.com/）   多说2017.6.1已经被被和谐，改用disqus
+disqus_username: lykqnbz
+
+
+
+# Analytics settings
+# Baidu Analytics
+ba_track_id: 405b99ad0dfebc7ee3049df100f49c92
+# Google Analytics
+ga_track_id: 'UA-103680612-1'            # Format: UA-xxxxxx-xx
+ga_domain: wangxiang.men
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "愿生命线满是星星。"
+sidebar-avatar: /img/xiang.png      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Friends
+friends: [
+    {
+        title: "AXiang Blog",
+        href: "http://wangxiang.vip"
+    },{
+        title: "NGA",
+        href: "http://bbs.nga.cn/"
+    },{
+        title: "ACFUN",
+        href: "http://www.acfun.tv/"
+    }
+]
